@@ -1,6 +1,9 @@
 import axios from 'axios';
 
-const API = axios.create({ baseURL: 'http://localhost:5000/api' });
+// The baseURL now dynamically looks at your environment variables!
+const API = axios.create({ 
+  baseURL: `${import.meta.env.VITE_API_URL}/api` 
+});
 
 export const auth = {
   register: (data) => API.post('/auth/register', data),
@@ -16,4 +19,4 @@ export const attendance = {
 
 export const dashboard = {
   getAnalytics: (role, email) => API.get(`/analytics?role=${role}&email=${email}`),
-};
+}
